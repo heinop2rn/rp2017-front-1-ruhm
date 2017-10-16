@@ -78,13 +78,18 @@ const rules = [
     use: {
       loader: 'babel-loader',
       options: {
-        presets: ['es2015', 'react', 'stage-0']
+        presets: ['es2015', 'react', 'stage-0'],
+        plugins: [
+          'transform-object-rest-spread',
+          'transform-do-expressions',
+          ['import', { libraryName: 'antd', style: 'css' }]
+        ]
       }
     }
   },
   {
     test: /media\/([^/]*)\.(jpe?g|png|gif|svg)$/i,
-    exclude: [/node_modules/],
+   
     use: [
       {
         loader: 'url-loader',
@@ -94,7 +99,7 @@ const rules = [
   },
   {
     test: /fonts\/([^/]*)\.(woff|woff2|eot|ttf|svg)$/,
-    exclude: /node_modules/,
+   
     use: [
       {
         loader: 'url-loader',
@@ -105,7 +110,7 @@ const rules = [
   // TODO add autoprefixer like autoprefixer?browsers=last 2 version
   {
     test: /\.scss$/,
-    exclude: /node_modules/,
+  
     use: extractSCSS.extract({
       fallback: 'style-loader',
       use: [
@@ -116,7 +121,7 @@ const rules = [
   },
   {
     test: /\.css$/,
-    exclude: /node_modules/,
+  
     use: extractSCSS.extract({
       fallback: 'style-loader',
       use: [
